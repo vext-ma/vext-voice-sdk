@@ -1,0 +1,36 @@
+{
+  "name": "@vext/voice",
+  "version": "1.0.0",
+  "description": "Official Node.js & TypeScript SDK for Vext Voice AI Gateway (Sub-500ms Moroccan Darija & French Voice Telephony)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "vext",
+    "voice-ai",
+    "morocco",
+    "darija",
+    "envoisms",
+    "whatsapp-calling",
+    "telephony",
+    "cod-confirmation"
+  ],
+  "author": "Vext Telecommunications <engineering@vext.ma>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abdnaouri/vext-voice-sdk.git"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^20.17.10"
+  }
+}
