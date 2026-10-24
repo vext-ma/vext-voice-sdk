@@ -8,16 +8,29 @@ export class WalletResource {
    * Retrieve current EnvoiSMS prepaid MAD balance.
    */
   async getBalance(): Promise<WalletBalance> {
-    const response = await this.http.get<{ tenant_id: string; balance_cents: number; balance_mad: string }>(
-      '/api/vext/tenant-config/me'
-    );
+    try {
+      const response = await this.http.get<{ tenant_id: string; balance_cents: number; balance_mad: number | string }>(
+        '/v1/vext/wallet/balance'
+      );
 
-    return {
-      tenantId: response.data.tenant_id,
-      balanceCents: response.data.balance_cents,
-      balanceMad: parseFloat(response.data.balance_mad),
-      currency: 'MAD',
-    };
+      return {
+        tenantId: response.data.tenant_id,
+        balanceCents: response.data.balance_cents,
+        balanceMad: typeof response.data.balance_mad === 'number' ? response.data.balance_mad : parseFloat(response.data.balance_mad),
+        currency: 'MAD',
+      };
+    } catch {
+      const response = await this.http.get<{ tenant_id: string; balance_cents: number; balance_mad: string }>(
+        '/api/vext/tenant-config/me'
+      );
+
+      return {
+        tenantId: response.data.tenant_id,
+        balanceCents: response.data.balance_cents,
+        balanceMad: parseFloat(response.data.balance_mad),
+        currency: 'MAD',
+      };
+    }
   }
 
   /**
